@@ -1,33 +1,95 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import {
+  House,
+  Heart,
+  User,
+  Compass,
+} from "lucide-react-native";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import Colors from "@/constants/theme";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+
+        tabBarStyle: {
+          backgroundColor: "#111827",
+          borderTopWidth: 0,
+          height: 85,
+          paddingBottom: 20,
+          paddingTop: 10,
+        },
+
+        tabBarActiveTintColor:
+          Colors.accent,
+
+        tabBarInactiveTintColor:
+          "#94A3B8",
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({
+            color,
+            size,
+          }) => (
+            <House
+              color={color}
+              size={size}
+            />
+          ),
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="swipescreen"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Explorar",
+          tabBarIcon: ({
+            color,
+            size,
+          }) => (
+            <Compass
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="favorites"
+        options={{
+          title: "Favoritos",
+          tabBarIcon: ({
+            color,
+            size,
+          }) => (
+            <Heart
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Perfil",
+          tabBarIcon: ({
+            color,
+            size,
+          }) => (
+            <User
+              color={color}
+              size={size}
+            />
+          ),
         }}
       />
     </Tabs>
